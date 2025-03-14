@@ -1,0 +1,2 @@
+evidence(called(maxwell), false).
+evidence(called(joan), true).

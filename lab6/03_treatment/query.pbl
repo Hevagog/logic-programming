@@ -1,0 +1,4 @@
+evidence(calcium).
+evidence(bisphosphonates).
+
+query(succesful_treatment).

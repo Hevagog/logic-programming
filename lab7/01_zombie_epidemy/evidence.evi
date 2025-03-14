@@ -1,0 +1,4 @@
+evidence(initially_infected(X)) :- human(X), between(1,2,X).
+evidence(\+ initially_infected(X)) :- human(X), \+between(1,2,X).
+evidence(resistant(X)) :- human(X), between(3,4,X).
+evidence(\+ resistant(X)) :- human(X), \+ between(3,4,X).

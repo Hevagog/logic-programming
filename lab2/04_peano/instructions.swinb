@@ -1,0 +1,114 @@
+<div class="notebook">
+
+<div class="nb-cell markdown" name="md1">
+# The Peano Arithmetics
+
+Till now, to do basic arithmetics, we have used built-in integeres and the `is` operator.  
+Let's try to solve the same problem more declaratively and implement the natural numbers arithmetic from scratch.
+We will implement the [Peano arithmetic](https://www.wikiwand.com/en/Peano_axioms). 
+According to its axioms, there is only one constant in our system, a.k.a. 'zero'.
+Other than that, there also a `s/1` ('s' stands for a successor), that represents a number incremented by 1.
+
+So, if `zero` is `0`, then `s(zero)` is `1`, `s(s(s(zero)))` is `3`, etc.
+
+The missions described briefly in this document will concerns predicates operating on such number.
+
+## Mission 1: Translation
+
+The Peano number may be bit difficult to read... Define a `peano_number/2` predicate to translate between the Peano number and their corresponding *normal* numbers.
+</div>
+
+<div class="nb-cell program" data-background="true" name="p1">
+% peano_number(peano number, natural number)
+peano_number(X, Y) :- fail.
+</div>
+
+<div class="nb-cell markdown" name="md3">
+Below a basic query to test your predicate :
+</div>
+
+<div class="nb-cell query" name="q3">
+peano_number(s(s(s(zero))), X).
+</div>
+
+<div class="nb-cell markdown" name="md2">
+The result should be: `X = 3`.
+
+### Questions:
+- Is it possible to translate number in both directions (peano -> natural and natural -> peano)? 
+- If so, does the translation for every case?
+
+## Mission 2: Add
+
+Adding is the most basic arithmetic operation. 
+According to the Peano axioms it is defined by two axioms:
+
+- 8. x + zero = x
+- 9. x + s(y) = s(x + y)
+
+Implement the `peano_add/3` predicate representing these axioms.
+</div>
+
+<div class="nb-cell program" data-background="true" name="p2">
+% peano_add(peano number, peano number, peano number)
+peano_add(X, Y, Z) :- fail.
+</div>
+
+<div class="nb-cell markdown" name="md4">
+Again, there is a basic query:
+</div>
+
+<div class="nb-cell query" name="q4">
+peano_add(s(s(s(zero))), s(s(zero)), X), peano_number(X,R).
+</div>
+
+<div class="nb-cell markdown" name="md5">
+
+The `X` should be equal to `s(s(s(s(s(zero)))))` and `R = 5`.
+
+### Question:
+- What is the easiest way to implement subtraction?
+- Is it possible to write a query to find all the possible Peano sums?
+
+## Mission 3: Multiplication
+
+Now, the multiplication! Again, there are two axioms:
+
+- 10. x * zero = zero
+- 11. x * s(y) = x * y + x
+
+We have to implement the `peano_times/3`:
+</div>
+
+<div class="nb-cell program" data-background="true" name="p3">
+% peano_mul(peano number, peano number, peano number)
+peano_times(X, Y, Z) :- fail.
+</div>
+
+<div class="nb-cell markdown" name="md6">
+Again, a query:
+</div>
+
+<div class="nb-cell query" name="q2">
+peano_times(s(s(s(zero))), s(s(zero)), X), peano_number(X,R).
+</div>
+
+<div class="nb-cell markdown" name="md7">
+The expected result is `X = s(s(s(s(s(s(zero))))))` and `R = 6`.
+
+### Questions:
+- How could one implement an integer division?
+- Is it possible to write a query that would return all the possible Peano products?
+- How is this arithmetic better than the classical one using `is`?
+
+## Other missons
+
+TLDW: please implement:
+- `peano_greater_than/2`, compares two number like `&gt;` 
+- `peano_div/3` is the integer division (without a reminder)
+- `peano_mod/3` calculates the division reminder
+- `peano_is_even/1`, checks whether a number is even
+- `peano_is_odd/1`, checks whether a number is odd
+</div>
+
+</div>

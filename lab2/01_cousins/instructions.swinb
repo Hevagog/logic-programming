@@ -1,0 +1,49 @@
+<div class="notebook">
+
+<div class="nb-cell markdown" name="md1">
+# Cousins - the Second Attempt
+</div>
+
+<div class="nb-cell markdown" name="md2">
+Below there is presented an already familiar knowledge base:
+</div>
+
+<div class="nb-cell program" name="p1">
+is_ancestor(X,Y) :- is_parent(X,Y).
+is_ancestor(X,Y) :- is_parent(Z,Y),
+                    is_parent(X,Z).
+
+is_cousin(X,Y) :- is_ancestor(Z,X),
+                  is_ancestor(Z,Y),
+    			  X \= Y.
+
+% is_parent(parent, child)
+is_parent(kate, robert).
+is_parent(kate, michael).
+is_parent(thomas, robert).
+is_parent(thomas, elisa).
+is_parent(robert, miriam).
+</div>
+
+<div class="nb-cell markdown" name="md3">
+It may look fine, but the query below is not satifactory:
+</div>
+
+<div class="nb-cell query" name="q1">
+is_cousin(X,Y).
+</div>
+
+<div class="nb-cell markdown" name="md4">
+Please look through the results. You may notice that: 
+
+1. the relation is reflexive, and every pair is present twice, e.g., `X = elisa, Y = miriam` and `X = miriam, Y = elisa` 
+2. the result are repeated, e.g., result `X = robert, Y = miriam` appears twice.
+</div>
+
+<div class="nb-cell markdown" name="md5">
+## Your Mission
+
+Fix the `is_cousin/2` predicate so every pair of cousins should apear only once. Use newly learned predicates: `assert` and `retractall`.
+</div>
+
+</div>

@@ -1,0 +1,3 @@
+query(infected(1)).
+query(infected(3)).
+query(infected(5)).

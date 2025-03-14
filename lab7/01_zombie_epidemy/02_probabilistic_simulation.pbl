@@ -1,0 +1,32 @@
+time(T) :- between(0, 7, T).
+human(X) :- between(1, 7, X).
+0.1::contact(X,Y,T) :- time(T), human(X), human(Y), X \= Y.
+
+% TODO:
+% define probabilistic simulation model of the epidemy,
+% - probabilities stay as in the relational model
+% - bobot will use 02_query.que query and evidence.evi evidence
+% tip 1. if somebody was infected in time T, they stay infected in time T+1
+% tip 2. in prolog one has to use `is` for arithmetic operation, i.e. `BT is T - 1'
+
+0.25::initially_infected(X) :- human(X).
+
+0.05::resistant(X):- human(X).
+
+1::\+infected_via_air(X,T) :-time(T), resistant(X).
+    
+0.5::\+infected_via_contact(X,T) :- time(T), resistant(X).
+
+0.1::infected_via_air(X,T) :- 
+    time(T),
+    human(X).
+
+0.6::infected_via_contact(X, T):-
+    contact(Y, X, T),
+    infected(Y, T).
+
+    
+infected(X,0) :- initially_infected(X).
+infected(X,T):- time(T), T > 0, BT is T - 1, infected(X, BT).
+infected(X,T):- time(T), T > 0,BT is T - 1, infected_via_contact(X,BT).
+infected(X,T):- time(T), T > 0,BT is T - 1, infected_via_air(X,BT).

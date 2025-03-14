@@ -1,0 +1,23 @@
+0.55::smoker.
+0.15::visited_asia.
+0.26666667::tuberculosis :- visited_asia.
+0.02352941::tuberculosis :- \+visited_asia.
+0.12727273::lung_cancer :- smoker.
+0.02222222::lung_cancer :- \+smoker.
+0.67272727::bronchitis :- smoker.
+0.37777778::bronchitis :- \+smoker.
+0.0::either_tb_or_lung_cancer :- tuberculosis, lung_cancer.
+0.0::either_tb_or_lung_cancer :- \+tuberculosis, lung_cancer.
+0.0::either_tb_or_lung_cancer :- tuberculosis, \+lung_cancer.
+1.0::either_tb_or_lung_cancer :- \+tuberculosis, \+lung_cancer.
+0.74468085::dyspnea :- either_tb_or_lung_cancer, bronchitis.
+0.12820513::dyspnea :- either_tb_or_lung_cancer, \+bronchitis.
+1.0::dyspnea :- \+either_tb_or_lung_cancer, bronchitis.
+0.57142857::dyspnea :- \+either_tb_or_lung_cancer, \+bronchitis.
+0.03488372::xray_positive :- either_tb_or_lung_cancer.
+1.0::xray_positive :- \+either_tb_or_lung_cancer.
+
+%-21.068440915564672 [0.55, 0.15, 0.26666667, 0.02352941,
+%.12727273, 0.02222222, 0.67272727, 0.37777778, 0.0, 0.0, 0.0, 1.0, 0.74468085, 0.12820513, 1.0, 0.57142857, 0.03488372, 1.0] [t(_)::smoker, t(_)::visited_asia, t(_)::tubercul
+%osis, t(_)::tuberculosis, t(_)::lung_cancer, t(_)::lung_cancer, t(_)::bronchitis, t(_)::bronchitis, t(_)::either_tb_or_lung_cancer, t(_)::either_tb_or_lung_cancer, t(_)::either_tb_or_lung_cancer, t(_)::either_tb_or_lung_cancer, t(_)
+%::dyspnea, t(_)::dyspnea, t(_)::dyspnea, t(_)::dyspnea, t(_)::xray_positive, t(_)::xray_positive] 107

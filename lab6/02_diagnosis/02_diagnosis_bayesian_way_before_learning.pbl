@@ -1,0 +1,51 @@
+% take 01_diagnosis_bayesian_way and use t(_) instead of probabilities
+% put here a bayesian network with probabilities as defined in the instructions
+t(_)::smoker.
+t(_)::visited_asia.
+
+t(_)::tuberculosis :-
+    visited_asia.
+t(_)::tuberculosis :-
+    \+visited_asia.
+    
+t(_)::lung_cancer :-
+    smoker.
+t(_)::lung_cancer :-
+    \+smoker.
+    
+t(_)::bronchitis :-
+    smoker.
+t(_)::bronchitis :-
+    \+smoker.
+
+t(_)::either_tb_or_lung_cancer:-
+    tuberculosis,
+    lung_cancer.
+t(_)::either_tb_or_lung_cancer:-
+    \+tuberculosis,
+    lung_cancer.
+t(_)::either_tb_or_lung_cancer:-
+    tuberculosis,
+    \+lung_cancer.
+t(_)::either_tb_or_lung_cancer:-
+    \+tuberculosis,
+    \+lung_cancer.
+
+t(_)::dyspnea :-
+    either_tb_or_lung_cancer,
+    bronchitis.
+t(_)::dyspnea :-
+    either_tb_or_lung_cancer,
+    \+bronchitis.
+t(_)::dyspnea :-
+    \+either_tb_or_lung_cancer,
+    bronchitis.
+t(_)::dyspnea :-
+    \+either_tb_or_lung_cancer,
+    \+bronchitis.
+t(_)::xray_positive:-
+    either_tb_or_lung_cancer.
+t(_)::xray_positive:-
+    \+either_tb_or_lung_cancer.    
+    
+    

@@ -1,0 +1,54 @@
+% TODO:
+% - probability of a burglary in your neighborhood is rather high and equal 0.7.
+% - heavy earthquakes are very rare, the probability of such an earthquake equals 0.01.
+% - mild earthquakes are not uncommon, probability of a mild earthquake equals 0.19.
+% - your alarm's sensitivity is specified by five probabilities:
+%     * there is a 0.90 probability that the alarm starts when there both a burglary and a heavy earthquake occur at the same time.
+%     * 0.85 when both burglary and a mild earthquake occur at the same time
+%     * 0.80 during a burglary when there is no earthquake
+%     * 0.30 during a heavy earthquake without any burglars
+%     * 0.10 during a mild earthquake without any burglars
+% - if there is an alarm going on, the neighbor will call you with a 0.8 probability
+% - there is a small probability (0.1) that a neighbor calls you only to prank you
+
+neighbour(maxwell). neighbour(joan).
+
+0.7::burglary.
+
+0.01::earthquake(heavy);
+0.19::earthquake(mild);
+0.8::earthquake(none).
+
+
+0.9::alarm :-
+    burglary,earthquake(heavy).
+    
+0.85::alarm :-
+    burglary,earthquake(mild).
+    
+0.8::alarm :-
+    burglary,
+    \+earthquake(mild),
+    \+earthquake(heavy).
+
+
+0.3::alarm :-
+    earthquake(heavy),
+    \+burglary.
+    
+0.1::alarm :-
+    earthquake(mild),
+    \+burglary.
+
+0.8::called(Neighbour) :-
+    neighbour(Neighbour),
+    alarm.
+
+0.1::called(Neighbour) :-
+    neighbour(Neighbour),
+    \+alarm.
+    
+just_earthquake:-
+    \+burglary,
+    \+ earthquake(none).
+    

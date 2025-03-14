@@ -1,0 +1,2 @@
+probability of burglary = 0.78904026.
+probability of just an earthquake = 0.045031169.

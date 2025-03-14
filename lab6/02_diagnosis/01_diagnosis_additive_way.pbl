@@ -1,0 +1,45 @@
+% put here a bayesian network with the same probabilities, but in "problog" style
+% i.e.
+%   0.4::a :- b, c.
+%   0.2::a :- b, \+c.
+%   0.1::a :- \+b, c.
+%   0.15::a :- \+b, \+c.
+%
+%  should become:
+%
+%   0.2::a :- b.
+%   0.1::a :- c.
+%   0.15::a.
+
+0.5::smoker.
+0.01::visited_asia.
+
+0.05::tuberculosis :-
+    visited_asia.
+0.01::tuberculosis.
+    
+0.1::lung_cancer :-
+    smoker.
+0.01::lung_cancer.
+    
+0.6::bronchitis :-
+    smoker.
+0.3::bronchitis.
+
+1::either_tb_or_lung_cancer:-
+    tuberculosis.
+1::either_tb_or_lung_cancer:-
+    lung_cancer.
+0::either_tb_or_lung_cancer.
+
+0.7::dyspnea :-
+    either_tb_or_lung_cancer.
+0.8::dyspnea :-
+    bronchitis.
+0.1::dyspnea.
+
+0.98::xray_positive:-
+    either_tb_or_lung_cancer.
+0.05::xray_positive.    
+    
+    

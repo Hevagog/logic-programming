@@ -1,0 +1,1 @@
+# Logic Programming class assignments

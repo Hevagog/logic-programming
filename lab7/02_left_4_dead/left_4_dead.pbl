@@ -1,0 +1,66 @@
+% path predicate 
+% --------------------------------------
+path(X,Y) :- edge(X,Y).
+path(X,Z) :- edge(X,Y), Y \= Z, path(Y,Z).
+
+% TODO: define probabilistic graph with edge/2
+% tip. bobot uses the following names `flying_military_fortress`, 'highway' and 'mall'
+%      for the crucial nodes in the graph
+% --------------------------------------
+
+0.5::edge(mall,gas_station).
+0.7::edge(gas_station,near_car).
+0.4::edge(gas_station,far_car).
+0.5::edge(near_car,far_car).
+0.3::edge(near_car,working_car).
+0.7::edge(far_car,working_car).
+0.8::edge(working_car,highway).
+
+0.6::edge(mall,radio).
+0.4::edge(radio,roof).
+0.2::edge(roof,helicopter).
+0.99::edge(helicopter,flying_military_fortress).
+
+
+% TODO: define decisions with names:
+% - 'go_gas_station'
+% - 'go_near_car'
+% - 'go switch_car'
+% --------------------------------------
+
+?::go_gas_station.
+?::go_near_car.
+?::go_switch_car.
+
+
+
+% TODO: define decisions impact on graph 
+% tip. how the decisions changes probabilities on the edges?
+% --------------------------------------
+
+1::\+edge(mall,radio):-go_gas_station.
+1::\+edge(mall,gas_station) :-\+go_gas_station.
+%1::\+go_near_car:- \+go_gas_station.
+%1::\+go_switch_car:- \+go_gas_station.
+
+1::\+edge(gas_station,far_car) :- go_near_car.
+1::\+edge(gas_station,near_car) :- \+go_near_car.
+
+1::\+edge(near_car,working_car):- go_switch_car.
+1::\+edge(near_car,far_car):- \+go_switch_car.
+
+
+
+% TODO: define utilities for goals
+% - first goal is to reach the `flying_military_fortress` from the `mall`
+%   utility: 100
+% - alternative goal is to reach the `highway` from the `mall`
+%   utility: 50
+% tip 1. use path/2
+% tip 2. bobot uses the following names `flying_military_fortress`, 'highway' and 'mall'
+%        for the crucial nodes in the graph
+% --------------------------------------
+utility(path(mall,flying_military_fortress), 100).
+utility(path(mall,highway),50).
+
+
